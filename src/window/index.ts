@@ -16,10 +16,10 @@ export function createWindow() {
 
   win.loadURL('http://localhost:9080')
 
-  const handler = (data: any) => {
+  // 向渲染进程派发全局事件，处理页签显示逻辑
+  GNBEventBus.shared.subscribe((data: any) => {
     win.webContents?.executeJavaScript(getSendEventJS(eventKey, data))
-  }
-  GNBEventBus.shared.subscribe(handler)
+  })
 
   handleOpenWindow(win.webContents)
 

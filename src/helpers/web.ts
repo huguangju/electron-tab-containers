@@ -46,6 +46,7 @@ export function startDevToolsIfNeed(webContents: WebContents) {
   if (!app.isPackaged) {
     let clicks = 0
     let previousClickTime = 0
+    // 拦截主进程中的事件
     webContents.addListener('before-input-event', (_event, input) => {
       if (input.type === 'keyDown' && input.code === 'ControlLeft') {
         const now = +new Date()

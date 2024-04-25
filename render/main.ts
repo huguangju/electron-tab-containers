@@ -19,7 +19,7 @@ tabGroup.on('ready', () => console.info('TabGroup is ready'))
 
 const onCreate = (tabGroup: any) => {
   onCreateTab(this, (id) => {
-    let tab = tabGroup.tabs.find((item: { containerId: number }) => item.containerId == id)
+    let tab = tabGroup.tabs.find((item: Tab) => item.containerId === id)
     if (!tab) {
       tab = tabGroup.addTab({
         containerId: id,
@@ -35,7 +35,7 @@ const onCreate = (tabGroup: any) => {
 
 const onClose = (tabGroup: any) => {
   onCloseTab(this, (id) => {
-    let tab = tabGroup.tabs.find((item: { containerId: number }) => item.containerId == id)
+    let tab = tabGroup.tabs.find((item: Tab) => item.containerId === id)
     if (tab) {
       tab.close(true, false)
     }
@@ -45,7 +45,7 @@ const onClose = (tabGroup: any) => {
 const onSwitch = (tabGroup: any) => {
   onSwitchTab(this, (id) => {
     // 监听到需要切换标签
-    let tab = tabGroup.tabs.find((item: { containerId: number }) => item.containerId == id)
+    let tab = tabGroup.tabs.find((item: Tab) => item.containerId === id)
     if (tab && !tab.isActivated) {
       tab.activate()
     }
@@ -61,10 +61,12 @@ const onTabContentChange = (tabGroup: any) => {
   })
 }
 
+// 监听主进程派发的事件，处理 TabGroup 组件对应的逻辑
 onCreate(tabGroup)
 onSwitch(tabGroup)
 onClose(tabGroup)
 onTabContentChange(tabGroup)
+
 frameDidReadyOnTabPage()
 
 tabGroup.on('tab-active', (tab: Tab) => {
@@ -78,4 +80,4 @@ tabGroup.on('click-add-button', () => {
 
 createTabOnWindow('https://www.gaoding.com')
 
-createTabOnWindow('https://www.gaoding.com')
+// createTabOnWindow('https://www.gaoding.com')

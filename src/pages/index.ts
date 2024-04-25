@@ -28,7 +28,7 @@ export class GDTabPageContainer {
   /**
    * 存储的 tabs <url, id>
    */
-  private tabs: Map<string, number>
+  private readonly tabs: Map<string, number>
   /**
    * 记录当前的 URL 集合
    */
@@ -54,6 +54,7 @@ export class GDTabPageContainer {
    * @param url URL
    */
   public async switchTab(url: string): Promise<GDWebContainer> {
+    // 等渲染进程加载完成再处理
     await this.initFrameIfNeed()
     let id = this.tabs.get(url)
     if (!id) {
@@ -66,6 +67,7 @@ export class GDTabPageContainer {
   /**
    * 切换 Tab 页
    * @param id 容器 ID
+   * @param notify
    */
   public async switchTabWithId(id: number, notify = true): Promise<GDWebContainer> {
     console.log(`触发 Tab 切换 id: ${id}`)

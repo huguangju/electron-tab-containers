@@ -166,6 +166,7 @@ class TabGroup extends HTMLElement {
 
   // tab information configuration
   private updateTabWidth() {
+
     const numTabs = this.tabs.length
     // 计算总宽度
     const totalWidth = numTabs * 180 + 8 * (numTabs - 1) // 总宽度

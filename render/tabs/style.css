@@ -127,7 +127,7 @@
 
 .tab:not(.active):hover {
   color: var(--tab-hover-color);
-  background: var(tab-hover-background);
+  background: var(--tab-hover-background);
 }
 
 .tab-badge {

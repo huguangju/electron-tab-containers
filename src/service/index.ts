@@ -44,8 +44,8 @@ const createTabOnWindow = (_: IpcMainEvent, { url = '' }) => {
 }
 
 const functionMap: any = {
-  closeTabOnTabPage: closeTabOnTabPage,
-  frameDidReadyOnTabPage: frameDidReadyOnTabPage,
-  switchTabOnWindow: switchTabOnWindow,
-  createTabOnWindow: createTabOnWindow,
+  closeTabOnTabPage,
+  frameDidReadyOnTabPage,
+  switchTabOnWindow,
+  createTabOnWindow,
 }
