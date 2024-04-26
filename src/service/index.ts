@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { IpcMainEvent, ipcMain } from 'electron'
+import { IpcMainEvent, IpcMainInvokeEvent, ipcMain } from 'electron'
 import { GDTabPageContainer } from '../pages'
 
 export class DesktopService {
@@ -13,7 +13,8 @@ export class DesktopService {
   }
 
   public init() {
-    ipcMain.handle('desktop:service', async (event: any, params?: any) => {
+    // 注册 IPC 处理函数
+    ipcMain.handle('desktop:service', async (event: IpcMainInvokeEvent, params?: { type: string, data: any }) => {
       const type = params['type']
       const data = params['data']
       const func = functionMap[type]
@@ -25,12 +26,12 @@ export class DesktopService {
   }
 }
 
-const closeTabOnTabPage = async (_event: any, { id = -1 }) => {
+const closeTabOnTabPage = async (_event: IpcMainInvokeEvent, { id = -1 }) => {
   GDTabPageContainer.shared.closeTab(id)
   return {}
 }
 
-const frameDidReadyOnTabPage = async (_event: any) => {
+const frameDidReadyOnTabPage = async (_event: IpcMainInvokeEvent) => {
   GDTabPageContainer.shared.setFrameReady()
   return {}
 }

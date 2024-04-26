@@ -107,6 +107,7 @@ class GDContainerManager {
   // ================ Private Methods ================= //
   /**
    * 预加载 Container
+   * 视图预热，提前加载 BrowserView 空对象，让下一个标签更快的打开
    */
   private preloadContainer() {
     const count = MAX_PRELOAD_CONTAINER_COUNT - this.preloads.length

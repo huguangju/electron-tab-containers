@@ -21,7 +21,7 @@ export interface GDWebContainerOptions extends BrowserViewConstructorOptions {
 }
 
 /**
- * Web 容器
+ * Web 视图容器（BrowserView 容器）
  */
 export class GDWebContainer {
   /**
@@ -50,13 +50,10 @@ export class GDWebContainer {
   private initialized = false
 
   constructor(options: GDWebContainerOptions = {}) {
-    const defaultOptions: GDWebContainerOptions = {
+    this.options = {
       useLoadingView: false,
       useErrorView: false,
       useHTMLTitleAndIcon: false,
-    }
-    this.options = {
-      ...defaultOptions,
       ...options,
     }
     this.context = new BrowserView(this.options)
@@ -92,7 +89,7 @@ export class GDWebContainer {
    * 设置选项
    * @param options 选项
    */
-  public async setOptions(options: GDWebContainerOptions) {
+  public setOptions(options: GDWebContainerOptions) {
     this.options = {
       ...this.options,
       ...options,
